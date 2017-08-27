@@ -20,6 +20,10 @@ RSpec.configure do |config|
     Aws.config[:s3] = { stub_responses: true }
   end
 
+  config.after(:suite) do
+    FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
+  end
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)

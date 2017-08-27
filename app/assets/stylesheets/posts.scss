@@ -3,9 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
+  display: float;
+  text-align: center;
+}
+
+.page {
   display: flex;
   justify-content: center;
+}
 
+.navbar-text {
+  width: 550px;
 }
 
 .page-container {
