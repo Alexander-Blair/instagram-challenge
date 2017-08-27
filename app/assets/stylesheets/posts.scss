@@ -2,6 +2,50 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-tbody {
+body {
+  display: flex;
+  justify-content: center;
+
+}
+
+.page-container {
   display: float;
+  text-align: center;
+  width: 550px;
+}
+
+.post {
+  text-align: left;
+}
+
+.post-image {
+  border: 2px solid gray;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.edit-options {
+  text-align: right;
+  margin: 0px 50px;
+}
+
+.comment {
+  width: 350px;
+  word-wrap: break-word;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.caption {
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.delete {
+  border: none;
 }

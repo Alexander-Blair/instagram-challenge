@@ -1,28 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<h1>InstaGulls</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class='page-container'>
+  <h1>Instagram</h1>
+  <h3><%= link_to 'New Post', new_post_path %></h3>
+  <% @posts.each do |post| %>
+    <div class='post' id='post-<%= post.id %>'>
+      <div class='edit-options'>
+        <%= link_to 'Edit', edit_post_path(post) %>
+        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Delete post?' } %>
+      </div>
+      <div class='post-image'><%= image_tag post.image.url(:large) %></div>
+      <%= simple_format("[Username] " + post.description, class: 'caption') %>
+      <ul><% post.comments.each do |comment| %>
+        <li class='comment'>
+          <%= comment.content %>
+          <%= link_to 'X', comment, method: :delete, data: { confirm: 'Delete comment?' } %>
+        </li>
+      <% end %>
+      </ul>
+      <%= form_for @comment, url: { controller: "comments", action: "create" } do |form| %>
+      <% if @comment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr class='post' id='post-<%= post.id %>'>
-        <td>[Username]</td>
-        <td><%= image_tag post.image.url(:square) %></td>
-        <td><%= post.description %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <ul>
+          <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
 
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+      <div class="field">
+        <%= form.text_field :content, id: :comment_content %>
+        <%= form.hidden_field :post_id, value: post.id %>
+        <%= form.submit "Add Comment" %>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

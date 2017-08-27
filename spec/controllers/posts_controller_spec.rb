@@ -29,14 +29,14 @@ RSpec.describe PostsController, type: :controller do
   describe "POST" do
     it "should create post" do
       post :create, params: new_post_params
-      expect(response).to redirect_to post_url(Post.last)
+      expect(response).to redirect_to posts_url
     end
   end
 
   describe "UPDATE" do
     it "updates post successfully" do
       patch :update, params: { id: post_0.id, post: { description: "new description" } }
-      expect(response).to redirect_to post_url(Post.last)
+      expect(response).to redirect_to posts_url
     end
   end
 
