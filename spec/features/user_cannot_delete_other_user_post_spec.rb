@@ -10,8 +10,6 @@ RSpec.feature "creating posts", type: :feature do
 
   scenario "creating a post" do
     visit posts_path
-    within('#post-' + post_to_delete.id.to_s) do
-      expect(page).not_to have_link('Delete')
-    end
+    expect(find('#post-' + post_to_delete.id.to_s)).not_to have_link('Delete')
   end
 end

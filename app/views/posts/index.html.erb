@@ -15,9 +15,11 @@
           <li class='comment'>
             <span class='comment-user'><%= comment.user.username %></span>
             <%= comment.content %>
-            <%= link_to 'X', comment, method: :delete,
-                                      class: 'comment-delete-button',
-                                      data: { confirm: 'Delete comment?' } %>
+            <% if comment.user == current_user || post.user == current_user %>
+              <%= link_to 'X', comment, method: :delete,
+                                        class: 'comment-delete-button',
+                                        data: { confirm: 'Delete comment?' } %>
+            <% end %>
           </li>
         <% end %>
         </ul>
