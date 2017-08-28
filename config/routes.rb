@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :comments, only: :index
   end
 
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
   resources :comments, only: [:create, :destroy]
 
   root to: 'posts#index'

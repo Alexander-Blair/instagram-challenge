@@ -8,7 +8,7 @@
         <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Delete post?' } %>
       </div>
       <div class='post-image'><%= image_tag post.image.url(:large) %></div>
-      <%= simple_format("[Username] " + post.description, class: 'caption') %>
+      <%= simple_format(post.user.username + " " + post.description, class: 'caption') %>
       <ul><% post.comments.each do |comment| %>
         <li class='comment'>
           <%= comment.content %>
