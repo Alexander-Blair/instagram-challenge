@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.feature "add comment to post", type: :feature do
   let!(:example_post_0) { create(:valid_post) }
   let!(:example_post_1) { create(:valid_post) }
-  let!(:user) { create(:valid_user) }
+  let!(:example_user) { create(:valid_user) }
 
   before do
-    sign_in(user)
+    sign_in(example_user)
   end
 
   scenario "creating a post" do

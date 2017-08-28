@@ -3,41 +3,44 @@
   <h3><%= link_to 'New Post', new_post_path %></h3>
   <% @posts.each do |post| %>
     <div class='post' id='post-<%= post.id %>'>
-      <div class='edit-options'>
-        <%= link_to 'Edit', edit_post_path(post) %>
-        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Delete post?' } %>
-      </div>
+      <% if post.user == current_user %>
+        <div class='edit-options'>
+          <%= link_to 'Edit', edit_post_path(post) %>
+          <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Delete post?' } %>
+        </div>
+      <% end %>
       <div class='post-image'><%= image_tag post.image.url(:large) %></div>
-      <span class='username'><%= post.user.username %></span> <%= post.description %>
-      <ul><% post.comments.each do |comment| %>
-        <li class='comment'>
-          <span class='comment-user'><%= comment.user.username %></span>
-          <%= comment.content %>
-          <%= link_to 'X', comment, method: :delete,
-                                    class: 'comment-delete-button',
-                                    data: { confirm: 'Delete comment?' } %>
-        </li>
-      <% end %>
-      </ul>
-      <%= form_for @comment, url: { controller: "comments", action: "create" } do |form| %>
-      <% if @comment.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-        <ul>
-          <% @comment.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-          <% end %>
+        <span class='username'><%= post.user.username %></span> <%= post.description %>
+        <ul><% post.comments.each do |comment| %>
+          <li class='comment'>
+            <span class='comment-user'><%= comment.user.username %></span>
+            <%= comment.content %>
+            <%= link_to 'X', comment, method: :delete,
+                                      class: 'comment-delete-button',
+                                      data: { confirm: 'Delete comment?' } %>
+          </li>
+        <% end %>
         </ul>
-      </div>
-      <% end %>
+        <%= form_for @comment, url: { controller: "comments", action: "create" } do |form| %>
+        <% if @comment.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-      <div class="field">
-        <%= form.text_field :content, id: :comment_content %>
-        <%= form.hidden_field :post_id, value: post.id %>
-        <%= form.hidden_field :user_id, value: current_user.id %>
-        <%= form.submit "Add Comment" %>
-      </div>
+            <ul>
+              <% @comment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <% if current_user %>
+          <div class="field">
+            <%= form.text_field :content, id: :comment_content %>
+            <%= form.hidden_field :post_id, value: post.id %>
+            <%= form.hidden_field :user_id, value: current_user.id %>
+            <%= form.submit "Add Comment" %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>
