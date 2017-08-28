@@ -1,24 +1,36 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A clone of Instagram, built with Ruby on Rails.
 
-Things you may want to cover:
+### Features
+* Anyone can post an image, comment on posts, and delete those comments and posts;
+* A user can sign up for an account, and log in and out;
 
-* Ruby version
 
-* System dependencies
+## Setup
 
-* Configuration
+$ git clone   git@github.com:Alexander-Blair/instagram-challenge.git  
+$ cd instagram-challenge  
+$ bundle install  
+$ bin/rails db:create  
+$ bin/rails db:migrate  
+$ bin/rails server
 
-* Database creation
+## How to run the test suite
 
-* Database initialization
+$ bin/rails db:migrate RAILS_ENV=test # Ensure your test environment is updated  
+$ bundle exec rspec # Runs the whole test suite  
+$ bundle exec rspec path/to/spec_file # Runs a single spec
 
-* How to run the test suite
+## Setting up remote hosting with Amazon S3
 
-* Services (job queues, cache servers, search engines, etc.)
+* Sign up to AWS and create a bucket to store file uploads.
 
-* Deployment instructions
+* Create a .env file in the root directory of the project and include the following details:  
 
-* ...
+S3_BUCKET_NAME=(bucket name)  
+AWS_ACCESS_KEY_ID=(your key)  
+AWS_SECRET_ACCESS_KEY=(your secret access key)  
+AWS_REGION=(region, eg eu-west-2)  
+
+The .env file should already be in the .gitignore file.
