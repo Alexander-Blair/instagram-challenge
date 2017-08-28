@@ -2,9 +2,11 @@ require 'rails_helper'
 include ActionDispatch::TestProcess
 
 RSpec.feature "creating posts", type: :feature do
+  let(:user) { create(:valid_user) }
   let(:description) { "Hello, world!" }
   let(:attach_file) { "#{::Rails.root}/spec/fixtures/test_image.jpeg" }
   before do
+    sign_in(user)
     allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
   end
 

@@ -5,7 +5,12 @@ RSpec.describe PostsController, type: :controller do
   let(:image_file) { Rails.root.join('spec/fixtures/test_image.jpeg') }
   let(:upload_object) { fixture_file_upload(image_file, 'image/png') }
   let(:new_post_params) { { post: { description: "description",
-                                    image: upload_object } } }
+                                    image: upload_object,
+                                    user_id: post_0.user.id } } }
+
+  before do
+    sign_in(post_0.user)
+  end
 
   describe "GET" do
     it "GET / returns status 200" do

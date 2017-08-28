@@ -5,11 +5,10 @@ FactoryGirl.define do
     sequence :description do |n|
       "Post number #{n}"
     end
+    image { fixture_file_upload(Rails.root.join('spec/fixtures/test_image.jpeg'), 'image/png') }
     factory :valid_post do
-      image { fixture_file_upload(Rails.root.join('spec/fixtures/test_image.jpeg'), 'image/png') }
+      user { create(:valid_user) }
     end
-    factory :post_wrong_attachment do
-      image { fixture_file_upload(Rails.root.join('spec/fixtures/test_image.jpeg'), 'doc/pdf') }
-    end
+    factory :invalid_post
   end
 end

@@ -7,6 +7,10 @@ RSpec.describe CommentsController, type: :controller do
   let(:valid_comment_params) { { comment: { content: "Hello, world!", post_id: example_post.id } } }
   let(:invalid_comment_params) { { comment: { content: "Hello, world!" } } }
 
+  before do
+    sign_in(example_post.user)
+  end
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Comment" do
