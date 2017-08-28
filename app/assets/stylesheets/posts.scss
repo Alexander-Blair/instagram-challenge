@@ -53,6 +53,15 @@ body {
   text-decoration: none;
 }
 
+.like-button {
+  margin-top: 10px;
+  width: 30px;
+}
+
+.like-button:active {
+  background-color: red;
+}
+
 .caption {
   font-weight: bold;
 }
