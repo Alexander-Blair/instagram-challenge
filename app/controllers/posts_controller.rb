@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   def index
     @comment = Comment.new
-    @posts = Post.all
+    @posts = Post.reverse_order
   end
 
   def show

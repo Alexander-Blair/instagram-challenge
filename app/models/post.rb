@@ -8,4 +8,8 @@ class Post < ApplicationRecord
   }
 
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
+  def self.reverse_order
+    all.reverse
+  end
 end
