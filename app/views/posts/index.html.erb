@@ -8,11 +8,14 @@
         <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Delete post?' } %>
       </div>
       <div class='post-image'><%= image_tag post.image.url(:large) %></div>
-      <%= simple_format(post.user.username + " " + post.description, class: 'caption') %>
+      <span class='username'><%= post.user.username %></span> <%= post.description %>
       <ul><% post.comments.each do |comment| %>
         <li class='comment'>
+          <span class='comment-user'><%= comment.user.username %></span>
           <%= comment.content %>
-          <%= link_to 'X', comment, method: :delete, data: { confirm: 'Delete comment?' } %>
+          <%= link_to 'X', comment, method: :delete,
+                                    class: 'comment-delete-button',
+                                    data: { confirm: 'Delete comment?' } %>
         </li>
       <% end %>
       </ul>
@@ -32,6 +35,7 @@
       <div class="field">
         <%= form.text_field :content, id: :comment_content %>
         <%= form.hidden_field :post_id, value: post.id %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
         <%= form.submit "Add Comment" %>
       </div>
       <% end %>

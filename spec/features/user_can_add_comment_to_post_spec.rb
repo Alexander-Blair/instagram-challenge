@@ -3,6 +3,11 @@ require 'rails_helper'
 RSpec.feature "add comment to post", type: :feature do
   let!(:example_post_0) { create(:valid_post) }
   let!(:example_post_1) { create(:valid_post) }
+  let!(:user) { create(:valid_user) }
+
+  before do
+    sign_in(user)
+  end
 
   scenario "creating a post" do
     visit posts_path
@@ -13,5 +18,6 @@ RSpec.feature "add comment to post", type: :feature do
     expect(example_post_1.description).to appear_before(Comment.last.content)
     expect(Comment.last.content).to appear_before(example_post_0.description)
     expect(page).to have_content(Comment.last.content)
+    expect(page).to have_content(Comment.last.user.username)
   end
 end

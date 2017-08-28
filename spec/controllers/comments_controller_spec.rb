@@ -4,7 +4,9 @@ RSpec.describe CommentsController, type: :controller do
 
   let!(:example_post) { create(:valid_post) }
   let!(:example_comment) { create(:valid_comment) }
-  let(:valid_comment_params) { { comment: { content: "Hello, world!", post_id: example_post.id } } }
+  let(:valid_comment_params) { { comment: { content: "Hello, world!",
+                                            post_id: example_post.id,
+                                            user_id: example_post.user.id } } }
   let(:invalid_comment_params) { { comment: { content: "Hello, world!" } } }
 
   before do
