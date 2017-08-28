@@ -14,7 +14,7 @@
       </div>
       <div class='likes'>
         <%= post.likes.count %> <span>likes</span>
-        <%= form_for @like, url: { controller: "likes", action: "create" } do |form| %>
+        <%= form_for @like, method: like_method(post, current_user), url: like_action(post, current_user) do |form| %>
           <%= form.hidden_field :user_id, value: current_user.id %>
           <%= form.hidden_field :post_id, value: post.id %>
           <%= form.submit "Like", type: :image, src: like_src(post, current_user), class: 'like-button' %>
